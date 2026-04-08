@@ -1,0 +1,106 @@
+/**
+ * BEM Methodology Implementation
+ * Bloco: produto
+ * Elementos: produto__imagem, produto__nome, produto__descricao
+ * Modificadores: produto--destaque
+ * 
+ * Versão: 1.0.0
+ * Boas práticas: Sem vazamento de escopo, isolamento por bloco
+ */
+
+/* Reset seguro - evita vazamento de estilos globais */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Bloco container - isolado para evitar colisões */
+.produtos {
+    max-width: 640px;
+    width: 100%;
+    margin: 56px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1%;
+    padding: 0 16px; /* Adiciona padding seguro para mobile */
+}
+
+/* 
+ * BLOCO: produto
+ * Todas as regras do bloco base
+ */
+.produto {
+    /* Propriedades base do bloco */
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+/* ELEMENTO: produto__imagem */
+.produto__imagem {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* ELEMENTO: produto__nome */
+.produto__nome {
+    font-size: 1.2em;
+    margin: 8px 0;
+    font-weight: 600;
+    line-height: 1.4;
+    word-break: break-word; /* Previne overflow de texto */
+}
+
+/* ELEMENTO: produto__descricao */
+.produto__descricao {
+    color: #666; /* Substituí "gray" por valor hex para consistência */
+    font-size: 0.95em;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* 
+ * MODIFICADOR: produto--destaque
+ * Aplica estilos adicionais ao bloco produto
+ */
+.produto--destaque {
+    border: 2px solid #FFD700; /* gold em hex */
+    padding: 8px;
+    background-color: #FFFF42;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover state seguro - apenas para dispositivos com hover */
+@media (hover: hover) {
+    .produto--destaque:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Responsividade segura */
+@media (max-width: 640px) {
+    .produtos {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin: 32px auto;
+    }
+    
+    .produto__imagem {
+        max-width: 100%;
+    }
+}
+
+/* Acessibilidade - reduz animações se usuário preferir */
+@media (prefers-reduced-motion: reduce) {
+    .produto,
+    .produto--destaque {
+        transition: none;
+    }
+}

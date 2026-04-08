@@ -1,0 +1,100 @@
+/**
+ * SASS Implementation with BEM Methodology
+ * Arquivo para quem optar por pré-processador
+ */
+
+// Variáveis seguras - sem vazamento de escopo
+$produto-border-color: #FFD700;
+$produto-destaque-bg: #FFFF42;
+$produto-text-color: #666;
+$produto-spacing: 8px;
+$grid-gap: 1%;
+
+// Reset e configurações base
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Container principal
+.produtos {
+    max-width: 640px;
+    width: 100%;
+    margin: 56px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $grid-gap;
+    padding: 0 16px;
+}
+
+// BLOCO: produto
+.produto {
+    display: block;
+    transition: transform 0.2s ease;
+    
+    // ELEMENTO: __imagem
+    &__imagem {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    
+    // ELEMENTO: __nome
+    &__nome {
+        font-size: 1.2em;
+        margin: $produto-spacing 0;
+        font-weight: 600;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+    
+    // ELEMENTO: __descricao
+    &__descricao {
+        color: $produto-text-color;
+        font-size: 0.95em;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+    
+    // MODIFICADOR: --destaque
+    &--destaque {
+        border: 2px solid $produto-border-color;
+        padding: $produto-spacing;
+        background-color: $produto-destaque-bg;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        
+        @media (hover: hover) {
+            &:hover {
+                transform: scale(1.02);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+}
+
+// Responsividade
+@media (max-width: 640px) {
+    .produtos {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin: 32px auto;
+    }
+    
+    .produto__imagem {
+        max-width: 100%;
+    }
+}
+
+// Acessibilidade
+@media (prefers-reduced-motion: reduce) {
+    .produto,
+    .produto--destaque {
+        transition: none;
+    }
+}
